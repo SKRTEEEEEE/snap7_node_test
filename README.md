@@ -10,7 +10,17 @@
 Template básico de proyectos con NodeJs.
 
 ## [Recursos](https://github.com/SKRTEEEEEE/markdowns)
-
+### Empezando
+Para ver y utilizar los diferentes template de este repositorio, navega a las diferentes ramas del proyecto una vez clonado utilizando:
+_Puedes utilizar el comando `git clone https://github.com/SKRTEEEEEE/node-template`. Después, utiliza el comando correspondiente a la rama deseada._
+#### Estructura ramas.
+##### `main`
+Rama introductoria del proyecto
+##### [`ts-tw`](https://github.com/SKRTEEEEEE/node-template/tree/ts-tw)
+Rama con template de Tailwind con TypeScript y Jest. Para dirigirte utiliza el siguiente comando:
+```bash
+git checkout ts-tw
+```
 ## Contacto
 
 ### Agradecimientos
