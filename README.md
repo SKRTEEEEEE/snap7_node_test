@@ -11,9 +11,7 @@ Template básico de proyectos con NodeJs.
 
 ## [Recursos](https://github.com/SKRTEEEEEE/markdowns)
 ### Empezando
-Para ver y utilizar los diferentes template de este repositorio, navega a las diferentes ramas del proyecto una vez clonado utilizando:
-- _Puedes utilizar el comando `git clone https://github.com/SKRTEEEEEE/node-template`._ 
-- _Después, utiliza el comando correspondiente a la rama deseada._
+Para ver y utilizar los diferentes template de este repositorio, navega a las diferentes ramas del proyecto una vez clonado.
 #### Estructura ramas.
 ##### `main`
 Rama introductoria del proyecto
