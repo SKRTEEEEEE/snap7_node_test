@@ -1,5 +1,3 @@
-// src/app.ts
-
 
 const POKEAPI_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -16,3 +14,7 @@ export const fetchPokemonData = async (offset: number, limit: number) => {
     throw error;
   }
 };
+
+
+
+
