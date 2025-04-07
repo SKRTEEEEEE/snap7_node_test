@@ -1,11 +1,10 @@
 import readline from 'readline';
 import { ReadDB } from './app/readDb';
 import { IP, RACK, SLOT } from './app/config';
-import { WriteDB } from './app/writeDb';
 import { ReadArea } from './app/readArea';
-import { WriteArea } from './app/writeArea';
+import { askForSecondInput, toggleBitForDuration } from './cli/base';
 
-const rl = readline.createInterface({
+export const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
@@ -15,7 +14,7 @@ const plcOpt = {
     RACK,
     SLOT
 }
-enum DBPrograms {  's300' = 1, 's15001700' = 2}
+enum DBPrograms {  's300' = 1, 's15001700' = 2, 's1516' = 3 }
 const dbProgramsOpt = {
     [DBPrograms.s300]: {
         DB_NUMBER: 3,
@@ -26,6 +25,11 @@ const dbProgramsOpt = {
         DB_NUMBER: 14,
         START_ADDRESS: 0,
         SIZE: 1
+    },
+    [DBPrograms.s1516]: {
+        DB_NUMBER: 2,
+        START_ADDRESS: 0,
+        SIZE: 14
     }
 }
 
@@ -34,7 +38,7 @@ console.log(`PLC CLI mini-app:\n===================`);
 let DB_NUMBER:number, START_ADDRESS:number, SIZE:number;
 let readDb: ReadDB;
 const askForPLCType = () => {
-    rl.question(`Select PLC type:\n1. Enter "1" or "S300" for S300 example\n2. Enter "2" or "S1500" for S1500/S1700 example\n=> `, (plcType) => {
+    rl.question(`Select PLC type:\n1. Enter "1" or "S300" for S300 example\n2. Enter "2" or "S1500" for S1500/S1700 example\n3. Enter "3" or "S1516" for S1516 full example\n=> `, (plcType) => {
         
         
         if (plcType.trim().toLowerCase() === 's300' || plcType.trim() === '1') {
@@ -42,40 +46,20 @@ const askForPLCType = () => {
             START_ADDRESS = dbProgramsOpt[DBPrograms.s300].START_ADDRESS;
             SIZE = dbProgramsOpt[DBPrograms.s300].SIZE;
             console.log('Using DB3 for S300');
-        } else {
+        } else if(plcType.trim().toLowerCase() === "s1500" || plcType.trim() === '2'){
             DB_NUMBER = dbProgramsOpt[DBPrograms.s15001700].DB_NUMBER;
             START_ADDRESS = dbProgramsOpt[DBPrograms.s15001700].START_ADDRESS;
             SIZE = dbProgramsOpt[DBPrograms.s15001700].SIZE;
             console.log('Using DB14 for S1500/S1700');
+        } else {
+            
         }
         readDb = new ReadDB(DB_NUMBER, START_ADDRESS, SIZE, plcOpt);
         startCLI();
     });
 };
 
-const askForSecondInput = () => {
-    rl.question('Enter the byte and bit position (e.g., "10.3" or "25.6"):\n=> ', async (position) => {
-        const [byteStr, bitStr] = position.split('.');
-        const byte = parseInt(byteStr, 10);
-        const bit = parseInt(bitStr, 10);
-        
-        if (isNaN(byte) || isNaN(bit)) {
-            console.log('Invalid input. Please enter two numbers separated by a dot (e.g., "10.3" or "25.6")');
-        } else {
-            try {
-                const actualBit = await readDb.readDBBit(byte, bit);
-                console.log(`Actual bit value: ${actualBit}`);
-                
-                console.log(`\n🛞 Toggling bit at byte ${byte}, bit ${bit}...`);
-                const writeDB = new WriteDB(DB_NUMBER, START_ADDRESS, SIZE, plcOpt);
-                await writeDB.writeDBBit(byte, bit, !actualBit);
-            } catch (error) {
-                console.log('Error writing bit:', error);
-            }
-        }
-        rl.prompt();
-    });
-};
+
 
 const startCLI = () => {
     if(DB_NUMBER === 3){
@@ -99,34 +83,12 @@ const startCLI = () => {
             }
             return false
         }
-        const toggleBitForDuration = async (byte: number, bit: number, duration: number) => {
-            try {
-                await readArea.connectPLC(); // Asegurarte de que la conexión está activa
-                // Leer el estado actual del bit
-                const actualBit = await readArea.readAreaBit(byte, bit);
-                console.log(`Actual bit value: ${actualBit}`);
-                
-                // Escribir el bit como "1" para simular la pulsación
-                console.log(`Pulsando el bit...`);
-                const writeArea = new WriteArea( START_ADDRESS, SIZE, plcOpt);
-                await writeArea.connectPLC(); // Asegurarte de que la conexión está activa
-                await writeArea.writeAreaBit(byte, bit, true);  // Seteamos el bit a 1
         
-                // Esperar el tiempo especificado (1 o 2 segundos)
-                setTimeout(async () => {
-                    // Después de la espera, restauramos el bit a su valor original (0)
-                    console.log(`Liberando el bit...`);
-                    await writeArea.writeAreaBit(byte, bit, false);  // Seteamos el bit a 0
-                }, duration);
-            } catch (error) {
-                console.log('Error toggling bit:', error);
-            }
-        };
         
         switch (command) {
             case 'bit':
                 console.log('\nSend the position of a bit to change its value...');
-                askForSecondInput();
+                askForSecondInput(readDb, rl, { dbNumber: DB_NUMBER, start: START_ADDRESS, size: SIZE, clientOpt: plcOpt });
                 break;
             case 'read':
                 console.log('\n🛞 Reading PLC DB values...\n');
@@ -140,7 +102,7 @@ const startCLI = () => {
                             readDb.readDBByte(258)
                         ]);
                         console.log(`✅ String: ${string}, Int: ${int}, Byte: ${byte}\n`);
-                    } else {
+                    } else if(DB_NUMBER === 14) {
                         const [bit0, bit1, bit2] = await Promise.all([
                             readDb.readDBBit(0, 0),
                             readDb.readDBBit(0, 1),
@@ -181,28 +143,33 @@ const startCLI = () => {
             case 'marcha':
                 if(switchException()) break;
                 console.log(`Pulsando marcha...`);
-                await toggleBitForDuration(0, 2, 2000); // %M0.2 durante 2 segundos
+                await toggleBitForDuration(0, 2, 2000, readArea, {start: START_ADDRESS, size: SIZE, clientOpt: plcOpt}); // %M0.2 durante 2 segundos
                 rl.prompt();
                 break;
             case 'paro':
                 if(switchException()) break;
                 console.log(`Pulsando paro...`);
-                await toggleBitForDuration(0, 3, 2000); // %M0.3 durante 2 segundos
+                await toggleBitForDuration(0, 3, 2000, readArea, {start: START_ADDRESS, size: SIZE, clientOpt: plcOpt}); // %M0.3 durante 2 segundos
                 break;
             case 'rearme':
                 if(switchException()) break;
                 console.log(`Pulsando rearme...`);
-                await toggleBitForDuration(0, 4, 2000); // %M0.4 durante 2 segundos
+                await toggleBitForDuration(0, 4, 2000, readArea, {start: START_ADDRESS, size: SIZE, clientOpt: plcOpt}); // %M0.4 durante 2 segundos
                 break;
             case 'directa':
                 if(switchException()) break;
                 console.log(`Pulsando directa...`);
-                await toggleBitForDuration(0, 0, 2000); // %M0.0 durante 2 segundos
+                await toggleBitForDuration(0, 0, 2000, readArea, {start: START_ADDRESS, size: SIZE, clientOpt: plcOpt}); // %M0.0 durante 2 segundos
                 break;
             case 'inversa':
                 if(switchException()) break;
                 console.log(`Pulsando inversa...`);
-                await toggleBitForDuration(0, 1, 2000); // %M0.1 durante 2 segundos
+                await toggleBitForDuration(0, 1, 2000, readArea, {start: START_ADDRESS, size: SIZE, clientOpt: plcOpt}); // %M0.1 durante 2 segundos
+                break;
+            case 'emergencia':
+                if(switchException()) break;
+                console.log(`Pulsando emergencia...`);
+                await toggleBitForDuration(0, 5, 2000, readArea, {start: START_ADDRESS, size: SIZE, clientOpt: plcOpt}); // %M0.5 durante 2 segundos
                 break;
             default:
                 console.log(`Unknown command: ${input}`);

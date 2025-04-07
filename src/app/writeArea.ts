@@ -1,9 +1,15 @@
 import { ClientOpt } from "./client";
 import { ReadArea } from "./readArea";
 
+export type WriteAreaOpt = {
+  start: number;
+  size: number;
+  clientOpt: ClientOpt;
+}
+
 export class WriteArea extends ReadArea {
-    constructor(start: number, size: number, clientOpt: ClientOpt) {
-      super(start, size,clientOpt);
+    constructor(writeAreaOpt: WriteAreaOpt) {
+      super(writeAreaOpt.start, writeAreaOpt.size,writeAreaOpt.clientOpt);
     }
   
     private async writeArea(buffer: Buffer): Promise<void> {
