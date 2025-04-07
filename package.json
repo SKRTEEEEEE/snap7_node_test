@@ -25,6 +25,8 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
-    "node-snap7": "^1.0.8"
+    "dotenv": "^16.4.7",
+    "node-snap7": "^1.0.8",
+    "telegraf": "^4.16.3"
   }
 }

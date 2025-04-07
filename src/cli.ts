@@ -1,19 +1,15 @@
 import readline from 'readline';
 import { ReadDB } from './app/readDb';
-import { IP, RACK, SLOT } from './app/config';
 import { ReadArea } from './app/readArea';
 import { askForSecondInput, toggleBitForDuration } from './cli/base';
+import { plcOpt } from './app/config';
 
 export const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-const plcOpt = {
-    IP,
-    RACK,
-    SLOT
-}
+
 enum DBPrograms {  's300' = 1, 's15001700' = 2, 's1516' = 3 }
 const dbProgramsOpt = {
     [DBPrograms.s300]: {
