@@ -13,12 +13,12 @@ export const askForSecondInput = (readDb: ReadDB, rl: readline.Interface, writeD
             console.log('Invalid input. Please enter two numbers separated by a dot (e.g., "10.3" or "25.6")');
         } else {
             try {
-                const actualBit = await readDb.readDBBit(byte, bit);
+                const actualBit = await readDb.readBit(byte, bit);
                 console.log(`Actual bit value: ${actualBit}`);
                 
                 console.log(`\n🛞 Toggling bit at byte ${byte}, bit ${bit}...`);
                 const writeDB = new WriteDB(writeDbOpt);
-                await writeDB.writeDBBit(byte, bit, !actualBit);
+                await writeDB.writeBit(byte, bit, !actualBit);
             } catch (error) {
                 console.log('Error writing bit:', error);
             }

@@ -30,9 +30,9 @@ export const toggleBitMForDuration = async (byte: number, bit: number, duration:
 export const switchBitDB = async (byte: number, bit: number, readDb: ReadDB, writeDbOpt: WriteDbOpt) => {
     try {
         await readDb.connectPLC(); 
-        const actualBit = await readDb.readDBBit(byte, bit);
+        const actualBit = await readDb.readBit(byte, bit);
         const writeDb = new WriteDB( writeDbOpt);
-        await writeDb.writeDBBit(byte, bit, !actualBit); 
+        await writeDb.writeBit(byte, bit, !actualBit); 
 
         
     } catch (error) {

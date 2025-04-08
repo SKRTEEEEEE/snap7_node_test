@@ -30,8 +30,8 @@ const serveStaticFile = (filePath: string, res: http.ServerResponse) => {
 
 const server = http.createServer((req, res) => {
   const publicPath = path.resolve(__dirname, '..', 'public');
-  if (req.url === '/' || req.url === '/index.html') {
-    const filePath = path.join(publicPath, 'index.html');
+  if (req.url === '/' || req.url === '/pokemon.html') {
+    const filePath = path.join(publicPath, 'pokemon.html');
     serveStaticFile(filePath, res);
   } else if (req.url?.startsWith('/public/') || req.url?.startsWith('/dist/')) {
     const filePath = path.join(__dirname, '..', req.url);

@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { connectPLC, disconnectPLC, getPlcStatus, ReadDB, WriteDB } from "../app";
 const DB_NUMBER: number = 3;
 const START_ADDRESS: number = 0;

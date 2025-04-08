@@ -97,23 +97,23 @@ const startCLI = () => {
                 try {
                     if (dbNumber === 3) {
                         const [string, int, byte] = await Promise.all([
-                            readDb.readDBString(2, 256),
-                            readDb.readDBInt(256),
-                            readDb.readDBByte(258)
+                            readDb.readString(2, 256),
+                            readDb.readInt(256),
+                            readDb.readByte(258)
                         ]);
                         console.log(`✅ String: ${string}, Int: ${int}, Byte: ${byte}\n`);
                     } else if(dbNumber === 14) {
                         const [bit0, bit1, bit2] = await Promise.all([
-                            readDb.readDBBit(0, 0),
-                            readDb.readDBBit(0, 1),
-                            readDb.readDBBit(0, 2)
+                            readDb.readBit(0, 0),
+                            readDb.readBit(0, 1),
+                            readDb.readBit(0, 2)
                         ]);
                         console.log(`✅ Etapa1: ${bit0} Etapa2: ${bit1} Etapa3: ${bit2}\n`);
                     } else if (dbNumber === 2) {
                         const [bit0, bit1, bit2] = await Promise.all([
-                            readDb.readDBBit(0, 0),
-                            readDb.readDBBit(0, 1),
-                            readDb.readDBBit(0, 2)
+                            readDb.readBit(0, 0),
+                            readDb.readBit(0, 1),
+                            readDb.readBit(0, 2)
                         ]);
                         console.log(`✅ Programa1: ${bit0} Programa2: ${bit1} Programa3: ${bit2}\n`);
                     }

@@ -21,16 +21,25 @@ export class WriteDB extends ReadDB {
         return Promise.reject(error);
       }
     }
+    
+    public async writeTime(start: number, milliseconds: number): Promise<void> {
+      try {
+        const buffer = await this.readDB();
+        buffer.writeInt32BE(milliseconds, start);
+        await this.writeDB(buffer);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
   
-    //Poner el bit al contrario de lo que este
-    public async writeDBBit(byte: number, bit: number, bitValue: boolean): Promise<void> {
+    public async writeBit(byte: number, bit: number, bitValue: boolean): Promise<void> {
       
      try {
       const buffer = await this.readDB();
       if (bitValue) {
-        buffer[byte] |= 1 << bit; // Poner el bit en 1
+        buffer[byte] |= 1 << bit; 
       } else {
-        buffer[byte] &= ~(1 << bit); // Poner el bit en 0
+        buffer[byte] &= ~(1 << bit); 
       }
       await this.writeDB(buffer);
      } catch (error) {
