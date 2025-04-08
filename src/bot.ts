@@ -77,8 +77,10 @@ bot.command("connect", async (ctx) => {
   readDb1 = new ReadDB({...dbOpt[DBOpt.DB1], clientOpt: plcOpt})
   readDb2 = new ReadDB({...dbOpt[DBOpt.DB2], clientOpt: plcOpt})
   try {
-    await readDb1.connectPLC();
-    await readDb2.connectPLC();
+    Promise.all([
+      await readDb1.connectPLC(),
+      await readDb2.connectPLC(),
+    ])
     ctx.reply(`Conexión establecida con el PLC. Estado1: ${readDb1.getPlcStatus()} Estado2: ${readDb2.getPlcStatus()}`);
   } catch (error) {
     console.error('Error al conectar al PLC:', error);

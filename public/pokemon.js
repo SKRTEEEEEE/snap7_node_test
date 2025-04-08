@@ -2,7 +2,7 @@ const baseURL = 'http://localhost:4001';
 
 document.getElementById('fetchButton').addEventListener('click', async () => {
   try {
-    const response = await fetch(`${baseURL}/pokemon`);
+    const response = await fetch(`${baseURL}/api/pokemon`);
     const data = await response.json();
 
     document.getElementById('pokemonList').innerHTML = `

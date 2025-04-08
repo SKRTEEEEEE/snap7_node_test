@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plc HMI</title>
+  <style>
+    .side-text {
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+    }
+    .indicator {
+      position: relative;
+      overflow: hidden;
+    }
+    .indicator::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%);
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body class="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+  <div class="w-full max-w-4xl rounded-lg border border-gray-300 bg-white shadow-xl">
+    <!-- Main Interface -->
+    <div class="bg-gray-300 p-4">
+      <div class="relative rounded-lg bg-slate-700 p-6 shadow-lg">
+        <!-- Header with Siemens Logo -->
+        <div class="mb-8 flex justify-between items-center">
+          <div class="inline-block rounded bg-teal-600 px-5 py-2 shadow-md">
+            <span class="text-2xl font-bold text-white">SIEMENS</span>
+          </div>
+          <div class="text-3xl font-light text-white tracking-wider">My HMI</div>
+        </div>
+
+        <!-- Side TOUCH text -->
+        <div class="absolute top-1/4 right-0 bottom-1/4 flex items-center">
+          <div class="side-text text-6xl font-bold text-slate-300 opacity-20">TOUCH</div>
+        </div>
+
+        <!-- Secondary Logo and Dropdown -->
+        <div class="mb-8 flex justify-between">
+          <div class="flex items-center">
+            <div class="mr-2 inline-block rounded bg-teal-600 px-2 py-1 shadow-sm">
+              <span class="text-sm font-bold text-white">SIEMENS</span>
+            </div>
+            <span class="text-xs text-slate-200">SIMATIC HMI 🔵/🔴</span>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <div class="relative w-96"></div>
+
+            <div class="rounded bg-slate-800 px-3 py-1 text-right text-slate-200 shadow-inner">
+                <div id="fecha" class="text-sm font-medium"></div>
+                <div id="hora" class="text-sm font-medium"></div>
+                
+                
+                
+            </div>
+          </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="mb-8 grid grid-cols-6 gap-4">
+          <!-- Emergency and Reset Buttons -->
+          <div class="col-span-1 space-y-4">
+            <button class="w-full rounded border-2 border-red-800 bg-red-600 py-4 font-bold text-white shadow-md transition-all duration-300 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 active:shadow-inner">EMERGENCIA</button>
+            <p class="text-xs text-red-200">⚠️ Fallos: 12</p>
+            <button class="w-full rounded border-2 border-gray-300 bg-white py-4 font-bold text-slate-700 shadow-md transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Rearme</button>
+          </div>
+
+          <!-- Status Indicators -->
+          <div class="col-span-1 flex flex-col items-center justify-center">
+            <div class="indicator mb-4 h-16 w-16 rounded-full border-2 border-gray-600 bg-gray-200 shadow-inner"></div>
+            <div class="indicator h-16 w-16 rounded-full border-2 border-gray-600 bg-gray-200 shadow-inner"></div>
+          </div>
+
+          <!-- Time Inputs -->
+          <div class="col-span-1 flex flex-col justify-center">
+            <div class="mb-3 flex items-center justify-end">
+              <span class="mr-2 font-bold text-slate-200">T1</span>
+              <input type="text" value="0" class="w-24 rounded border-2 border-gray-600 bg-gray-100 px-2 py-1 text-right font-medium shadow-inner focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" />
+            </div>
+            <div class="mb-3 flex items-center justify-end">
+              <span class="mr-2 font-bold text-slate-200">T2</span>
+              <input type="text" value="0" class="w-24 rounded border-2 border-gray-600 bg-gray-100 px-2 py-1 text-right font-medium shadow-inner focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" />
+            </div>
+            <div class="flex items-center justify-end">
+              <span class="mr-2 font-bold text-slate-200">T3</span>
+              <input type="text" value="1" class="w-24 rounded border-2 border-gray-600 bg-gray-100 px-2 py-1 text-right font-medium shadow-inner focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" />
+            </div>
+          </div>
+          
+          <div class="col-span-3 flex flex-col justify-center">
+            <div class="flex flex-col gap-4 rounded bg-slate-800 p-4 shadow-inner">
+              <h3 class="text-center text-lg font-medium text-slate-200">Estás en el programa <span class="rounded bg-cyan-500 px-2 py-0.5 text-white">3</span></h3>
+              <button class="w-full rounded-lg border-2 border-cyan-600 bg-slate-700 py-2 font-medium text-white shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Ver tiempos Grafcet</button>
+              <button class="w-full rounded-lg border-2 border-cyan-600 bg-slate-700 py-2 font-medium text-white shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Cambiar tiempos Grafcet</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motor Controls -->
+        <div class="mb-8 grid grid-cols-4 gap-6">
+          <div class="col-span-1 flex flex-col items-center">
+            <div class="mb-2 text-center font-medium text-slate-200">Motor Inversa</div>
+            <div class="indicator mb-4 h-16 w-16 rounded-full border-2 border-amber-700 bg-yellow-400 shadow-inner"></div>
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-2 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Inversa</button>
+          </div>
+
+          <div class="col-span-1 flex flex-col items-center">
+            <div class="mb-2 text-center font-medium text-slate-200">Motor Directa</div>
+            <div class="indicator mb-4 h-16 w-16 rounded-full border-2 border-amber-700 bg-yellow-400 shadow-inner"></div>
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-2 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Directa</button>
+          </div>
+
+          <div class="col-span-1 flex items-end">
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-4 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">MARCHA</button>
+          </div>
+
+          <div class="col-span-1 flex items-end">
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-4 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">PARO</button>
+          </div>
+        </div>
+
+        
+
+        
+      </div>
+    </div>
+  </div>
+  <script src="/public/pokemon.js"></script>
+
+</body>
+</html>
