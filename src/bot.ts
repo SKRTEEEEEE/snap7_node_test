@@ -130,7 +130,8 @@ bot.command("pm", async (ctx) => {
           await writeDb2.connectPLC();
           Promise.all([
             await writeDb2.writeBit(0, 0, !actualBitPrograma1),
-            await writeDb2.writeBit(0, 2, actualBitPrograma1)
+            await writeDb2.writeBit(0, 2, actualBitPrograma1),
+            await writeDb2.writeBit(0,3, actualBitPrograma1)
           ])
           ctx.reply(`Estado del programa cambiado al estado contrario: ${!actualBitPrograma1}`);
       }catch (error) {
@@ -145,12 +146,11 @@ bot.command("tv", async (ctx) => {
     ctx.reply('Conéctate al PLC 2 usando /connect.');
     return;
   }
-
   try {
     const tiempo1 = await readDb2.readTime(2);
     const tiempo2 = await readDb2.readTime(6);
     const tiempo3 = await readDb2.readTime(10);
-    ctx.reply(`Tiempo de los ciclo-> Ciclo 1: ${tiempo1 / 1000}s \n Ciclo 2: ${tiempo2/1000}s \n Ciclo 3: ${tiempo3/1000}s`);
+    ctx.reply(`Tiempo de los ciclos ->\n Ciclo 1: ${tiempo1 / 1000}s \n Ciclo 2: ${tiempo2/1000}s \n Ciclo 3: ${tiempo3/1000}s`);
   } catch (error) {
     console.error('Error al leer el tiempo del ciclo:', error);
     ctx.reply('Error al leer el tiempo del ciclo.');
@@ -162,7 +162,7 @@ const modTime = async (ctx:any, ciclo: 1 | 2 | 3) => {
     return;
   }
   const userId = ctx.from.id;
-  userState[userId] = {  ciclo };
+  userState[userId] = { ciclo };
   ctx.reply('Escribe el nuevo tiempo en mili segundos:')
 }
 bot.command("tm1", async (ctx) => {

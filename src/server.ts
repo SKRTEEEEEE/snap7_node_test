@@ -71,16 +71,15 @@ const handleReadAll = async (req:http.IncomingMessage, res:http.ServerResponse )
         ]);
         const numErr = await readDb1.readInt(2);
         // directa -> 2.0, inversa 2.1, emergencia 2.2, rearme 2.3,
-        const responseM = await Promise.all([
-
-        ])
+        
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
           status: readDb2.getPlcStatus(),
           tiempo1: responseDb2[0], tiempo2:responseDb2[1], tiempo3:responseDb2[2], numErr,
         }));
       } catch (error) {
-        
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Failed to read from PLC' }));
       } 
       
       
@@ -104,9 +103,7 @@ const server = http.createServer((req, res) => {
     serveStaticFile(filePath, res);
   }
   else if (req.url === "/api/read-all" && req.method === "GET") {
-      
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ status: 'Hello from the server!' }));
+    handleReadAll(req,res);
   }
   else if (req.url === '/api/pokemon' && req.method === 'GET') {
     debouncedFetch(req, res)

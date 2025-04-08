@@ -4,12 +4,13 @@ const client = new snap7.S7Client();
 
 // Configuración del PLC
 // const IP: string = "192.168.1.133";
-const IP: string = "192.168.224.218"
+// const IP: string = "192.168.224.218"
+const IP:string = "10.20.30.90"
 const RACK: number = 0;
-const SLOT: number = 2;
-const DB_NUMBER: number = 3;
+const SLOT: number = 1;
+const DB_NUMBER: number = 1;
 const START_ADDRESS: number = 0;
-const SIZE: number = 259;
+const SIZE: number = 14;
 
 // Función para conectar al PLC
 const connectPLC = (): Promise<void> => {
@@ -75,17 +76,20 @@ const main = async (): Promise<void> => {
          // Leer datos de la DB
          const buffer: Buffer = await readDB(DB_NUMBER, START_ADDRESS, SIZE);
 
+         //For 's300' example db configuration
          // Leer el valor STRING (del byte 2 al 256)
-         const productName: string = buffer.toString("utf-8", 2, 256).replace(/\x00/g, "");
-         console.log(`PRODUCT NAME: ${productName}`);
+        //  const productName: string = buffer.toString("utf-8", 2, 256).replace(/\x00/g, "");
+        //  console.log(`PRODUCT NAME: ${productName}`);
  
-         // Leer el valor INT (bytes 256-257)
-         const productValue: number = buffer.readUInt16BE(256);
-         console.log(`PRODUCT VALUE: ${productValue}`);
+        //  // Leer el valor INT (bytes 256-257)
+        //  const productValue: number = buffer.readUInt16BE(256);
+        //  console.log(`PRODUCT VALUE: ${productValue}`);
  
-         // Leer el valor BOOL (byte 258)
-         const productStatus: boolean = Boolean(buffer[258]);
-         console.log(`PRODUCT STATUS: ${productStatus}`);
+        //  // Leer el valor BOOL (byte 258)
+        //  const productStatus: boolean = Boolean(buffer[258]);
+        //  console.log(`PRODUCT STATUS: ${productStatus}`);
+
+         
     } catch (error) {
         console.error("❌ Error:", (error as Error).message);
     } finally {

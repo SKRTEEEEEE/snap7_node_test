@@ -69,6 +69,55 @@ En Snap7, las áreas de memoria se identifican por códigos hexadecimales:
 
 
 
+### ⚔️ **OPC UA vs Snap7** – Comparativa rápida
+
+| Característica                 | **OPC UA**                                             | **Snap7**                                            |
+|-------------------------------|--------------------------------------------------------|------------------------------------------------------|
+| 🔌 **Tipo de conexión**       | Estándar industrial basado en servidor cliente         | Protocolo nativo S7 (S7Comm)                         |
+| 📦 **Protocolo**              | OPC Unified Architecture (estándar abierto)            | Protocolo propietario de Siemens                     |
+| 🛠️ **Configuración en PLC**   | Requiere configurar y habilitar el servidor OPC UA     | No requiere configuración especial (excepto acceso) |
+| 🔐 **Seguridad**              | Seguridad integrada (certificados, cifrado, usuarios)  | No tiene seguridad integrada                         |
+| 🌐 **Compatibilidad**         | Multiplataforma y multivendor                          | Solo Siemens (S7-300, 400, 1200, 1500)               |
+| 🧠 **Modelo de datos**        | Estructurado, navegable (tipo árbol)                   | Raw access a bloques de memoria                     |
+| 🧪 **Diagnóstico y control**  | Limitado a lo expuesto en el servidor OPC              | Acceso total a bloques de datos y registros         |
+| 🔄 **Acceso a variables**     | Variables publicadas explícitamente                   | Acceso directo por dirección (DBx.DBWy)             |
+| ⚙️ **Facilidad de uso**       | Requiere configuración inicial en TIA Portal           | Más directo pero requiere conocer direcciones       |
+| 📚 **Librerías en Node.js**   | [`node-opcua`](https://github.com/node-opcua/node-opcua) | [`node-snap7`](https://github.com/mathiask88/node-snap7) |
+| 🧱 **Escalabilidad IoT/Cloud**| Muy buena, pensado para Industria 4.0                  | Limitado a redes internas o entornos cerrados       |
+
+---
+
+#### 🔍 ¿Cuándo usar OPC UA?
+
+✅ Si buscas:
+- Un **estándar abierto** y seguro.
+- Compatibilidad con **otros fabricantes**.
+- Integración con sistemas **SCADA, MES, IoT, o Cloud**.
+- Soporte estructurado de variables (modelos de objetos, browsable).
+
+⚠️ Pero requiere configuración en el PLC y tiene un consumo un poco mayor de recursos.
+
+---
+
+#### 🔧 ¿Cuándo usar Snap7?
+
+✅ Si buscas:
+- **Simplicidad** y acceso directo a datos.
+- Trabajar en entornos controlados sin mucha seguridad.
+- Leer/escribir datos sin que estén “publicados” en OPC.
+- Diagnóstico, estados de CPU, lectura de inputs/outputs, etc.
+
+⚠️ Pero **no es seguro** para uso en red pública o industrial abierta. No está soportado oficialmente por Siemens.
+
+---
+
+#### 🔩 Ejemplo típico de uso
+
+- 🏭 **OPC UA**: App de supervisión que se conecta a múltiples PLCs y sensores, con integración en Azure o AWS IoT.
+- 🔧 **Snap7**: Aplicación de mantenimiento o una herramienta interna que necesita acceso total a la memoria del PLC.
+
+
+
 
 ## Contacto
 
