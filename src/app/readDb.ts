@@ -1,13 +1,16 @@
-import { ClientOpt, PLCClient } from "./client";
+import { PLCClient } from "./client";
+import { DbOpt } from "./config";
+
+export type ReadDbOpt = DbOpt
 
 export class ReadDB extends PLCClient {
   // Función para leer datos de la DB
-  constructor(protected dbNumber: number, protected start: number, protected size: number, clientOpt: ClientOpt) {
-    super(clientOpt);
+  constructor(protected dbOpt: ReadDbOpt) {
+    super(dbOpt.clientOpt);
   }
   protected readDB(): Promise<Buffer> {
     return new Promise((resolve, reject) => {
-        this.client.DBRead(this.dbNumber, this.start, this.size, (err: number, buffer: Buffer) => {
+        this.client.DBRead(this.dbOpt.dbNumber, this.dbOpt.start, this.dbOpt.size, (err: number, buffer: Buffer) => {
             if (err) {
                 reject(new Error(this.client.ErrorText(err)));
             } else {

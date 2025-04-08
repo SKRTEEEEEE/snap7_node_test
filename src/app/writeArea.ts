@@ -1,12 +1,8 @@
-import { ClientOpt } from "./client";
+import { DbOpt } from "./config";
 import { ReadArea } from "./readArea";
 
-export type WriteAreaOpt = {
-  start: number;
-  size: number;
-  clientOpt: ClientOpt;
-}
-
+export type WriteAreaOpt = 
+Omit<DbOpt, "dbNumber">
 export class WriteArea extends ReadArea {
     constructor(writeAreaOpt: WriteAreaOpt) {
       super(writeAreaOpt.start, writeAreaOpt.size,writeAreaOpt.clientOpt);

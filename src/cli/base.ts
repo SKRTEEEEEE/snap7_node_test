@@ -1,8 +1,7 @@
 import { ReadDB } from "../app/readDb";
 import readline from 'readline';
 import { WriteDB, WriteDbOpt } from "../app/writeDb";
-import { ReadArea } from "../app/readArea";
-import { WriteArea, WriteAreaOpt } from "../app/writeArea";
+
 
 export const askForSecondInput = (readDb: ReadDB, rl: readline.Interface, writeDbOpt: WriteDbOpt) => {
     rl.question('Enter the byte and bit position (e.g., "10.3" or "25.6"):\n=> ', async (position) => {
@@ -27,26 +26,3 @@ export const askForSecondInput = (readDb: ReadDB, rl: readline.Interface, writeD
         rl.prompt();
     });
 };
-export const toggleBitForDuration = async (byte: number, bit: number, duration: number, readArea: ReadArea, writeAreaOpt: WriteAreaOpt) => {
-            try {
-                await readArea.connectPLC(); // Asegurarte de que la conexión está activa
-                // Leer el estado actual del bit
-                const actualBit = await readArea.readAreaBit(byte, bit);
-                console.log(`Actual bit value: ${actualBit}`);
-                
-                // Escribir el bit como "1" para simular la pulsación
-                console.log(`Pulsando el bit...`);
-                const writeArea = new WriteArea( writeAreaOpt);
-                await writeArea.connectPLC(); // Asegurarte de que la conexión está activa
-                await writeArea.writeAreaBit(byte, bit, true);  // Seteamos el bit a 1
-        
-                // Esperar el tiempo especificado (1 o 2 segundos)
-                setTimeout(async () => {
-                    // Después de la espera, restauramos el bit a su valor original (0)
-                    console.log(`Liberando el bit...`);
-                    await writeArea.writeAreaBit(byte, bit, false);  // Seteamos el bit a 0
-                }, duration);
-            } catch (error) {
-                console.log('Error toggling bit:', error);
-            }
-        };

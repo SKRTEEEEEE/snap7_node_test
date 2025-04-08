@@ -1,20 +1,15 @@
-import { ClientOpt } from "./client";
+import { DbOpt } from "./config";
 import { ReadDB } from "./readDb";
 
-export type WriteDbOpt = {
-  dbNumber: number;
-  start: number;
-  size: number;
-  clientOpt: ClientOpt;
-}
+export type WriteDbOpt = DbOpt
 
 export class WriteDB extends ReadDB {
-    constructor(protected writeDbOpt: WriteDbOpt) {super(writeDbOpt.dbNumber, writeDbOpt.start, writeDbOpt.size, writeDbOpt.clientOpt);}
+    constructor(protected writeDbOpt: WriteDbOpt) {super(writeDbOpt);}
   
     private async writeDB(buffer: Buffer): Promise<void> {
       try {
         return new Promise((resolve, reject) => {
-          this.client.DBWrite(this.dbNumber, this.start, this.size, buffer, (err: number) => {
+          this.client.DBWrite(this.writeDbOpt.dbNumber, this.writeDbOpt.start, this.writeDbOpt.size, buffer, (err: number) => {
             if (err) {
               reject(new Error(this.client.ErrorText(err)));
             } else {
