@@ -45,6 +45,16 @@ export class WriteDB extends ReadDB {
      } catch (error) {
       return Promise.reject(error);
      }
+    } 
+  
+    public async writeInt (start: number, intValue: number): Promise<void> {
+      try {
+        const buffer = await this.readDB();
+        buffer.writeInt16BE(intValue, start);
+        await this.writeDB(buffer);
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
   }
   

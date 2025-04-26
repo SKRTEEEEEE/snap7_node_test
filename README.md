@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-# Snap7 NodeJS Showcase
+# Conectividad a PLC con Node JS
 <a href="https://github.com/SKRTEEEEEE">
 <div align="center">
   <img  src="https://github.com/SKRTEEEEEE/SKRTEEEEEE/blob/main/resources/img/grid-snake.svg"
@@ -10,8 +10,11 @@
 
 ## Introducción
 
-Ejemplos básicos de proyectos con NodeJs y Snap7 para programar PLCs con **Snap7**. Puedes encontrar mas información sobre como conectar-se a la PLC o Snap7, al igual que las funcionalidades de este código pero escrito en `Python`, en el repositorio [snap7_py_show](https://github.com/SKRTEEEEEE/snap7_py_show.git).
+Ejemplos básicos de proyectos para obtener conectividad a PLCs con Node Js. Utilizando los siguientes protocolos de comunicación:
+- [Snap7](https://snap7.sourceforge.net/)
+- [OPC UA](https://opcfoundation.org/)
 
+  💡Puedes encontrar mas información sobre como conectar-se a la PLC, Snap7, OPC UA, al igual que las funcionalidades de este código pero escrito en `Python`, en el repositorio [snap7_py_show](https://github.com/SKRTEEEEEE/plc_py_conn).
 ### Conceptos desarrollados (funcionalidades):
 #### Scripts
 1. [snap7-test](./src/scripts/snap7-test.ts): Script con el código básico para conectar-se a la PLC y leer datos

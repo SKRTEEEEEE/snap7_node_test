@@ -50,7 +50,7 @@
             <div class="mr-2 inline-block rounded bg-teal-600 px-2 py-1 shadow-sm">
               <span class="text-sm font-bold text-white">SIEMENS</span>
             </div>
-            <span class=" flex gap-2 text-xs text-slate-200">SIMATIC HMI <span id="status"></span></span>
+            <span class="text-xs text-slate-200">SIMATIC HMI <span id="status"></span></span>
           </div>
 
           <div class="flex items-center space-x-4">
@@ -70,9 +70,9 @@
         <div class="mb-8 grid grid-cols-5 gap-4">
           <!-- Emergency and Reset Buttons -->
           <div class="col-span-1 space-y-4">
-            <button id="emergency" class="w-full rounded border-2 border-red-800 bg-red-600 py-4 font-bold text-white shadow-md transition-all duration-300 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 active:shadow-inner">EMERGENCIA</button>
+            <button class="w-full rounded border-2 border-red-800 bg-red-600 py-4 font-bold text-white shadow-md transition-all duration-300 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 active:shadow-inner">EMERGENCIA</button>
             <p class="text-xs text-red-200">⚠️ Fallos: <span id="num-err"></span></p>
-            <button id="reset" class="w-full rounded border-2 border-gray-300 bg-white py-4 font-bold text-slate-700 shadow-md transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner flex flex-col"><span>Reset</span> <span>Errores</span></button>
+            <button class="w-full rounded border-2 border-gray-300 bg-white py-4 font-bold text-slate-700 shadow-md transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Rearme</button>
           </div>
 
           <!-- Status Indicators
@@ -100,8 +100,8 @@
           <div class="col-span-3 flex flex-col justify-center">
             <div class="flex flex-col gap-4 rounded bg-slate-800 p-4 shadow-inner">
               <h3 class="text-center text-lg font-medium text-slate-200">Estás en el programa <span id="program" class="rounded bg-cyan-500 px-2 py-0.5 text-white"></span></h3>
-              <button id="refresh" class="w-full rounded-lg border-2 border-cyan-600 bg-slate-700 py-2 font-medium text-white shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Refrescar data HMI</button>
-              <button id="change-time" class="w-full rounded-lg border-2 border-cyan-600 bg-slate-700 py-2 font-medium text-white shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Cambiar tiempos Grafcet</button>
+              <button class="w-full rounded-lg border-2 border-cyan-600 bg-slate-700 py-2 font-medium text-white shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Refrescar tiempos Grafcet</button>
+              <button class="w-full rounded-lg border-2 border-cyan-600 bg-slate-700 py-2 font-medium text-white shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Cambiar tiempos Grafcet</button>
             </div>
           </div>
         </div>
@@ -111,21 +111,21 @@
           <div class="col-span-1 flex flex-col items-center">
             <!-- <div class="mb-2 text-center font-medium text-slate-200">Motor Inversa</div>
             <div class="indicator mb-4 h-16 w-16 rounded-full border-2 border-amber-700 bg-yellow-400 shadow-inner"></div> -->
-            <button disabled class="w-full rounded border border-gray-700 bg-slate-600 py-2 font-bold text-white shadow-md transition-all duration-200  active:shadow-inner">DISABLED</button>
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-2 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Inversa</button>
           </div>
 
           <div class="col-span-1 flex flex-col items-center">
             <!-- <div class="mb-2 text-center font-medium text-slate-200">Motor Directa</div>
             <div class="indicator mb-4 h-16 w-16 rounded-full border-2 border-amber-700 bg-yellow-400 shadow-inner"></div> -->
-            <button disabled class="w-full rounded border border-gray-700 bg-slate-600 py-2 font-bold text-white shadow-md transition-all duration-200  active:shadow-inner">DISABLED</button>
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-2 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Directa</button>
           </div>
 
           <div class="col-span-1 flex items-end">
-            <button id="p1-button" class="w-full rounded border border-gray-700 py-4 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Program 1</button>
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-4 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">MARCHA</button>
           </div>
 
           <div class="col-span-1 flex items-end">
-            <button id="p3-button" class="w-full rounded border border-gray-700 py-4 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">Program 3</button>
+            <button class="w-full rounded border border-gray-700 bg-slate-600 py-4 font-bold text-white shadow-md transition-all duration-200 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 active:shadow-inner">PARO</button>
           </div>
         </div>
 

@@ -10,7 +10,9 @@
     "build:ts": "tsc --watch",
     "build": "npm run build:css && npm run build:ts",
     "start:cli": "node dist/cli.js",
-    "start:server": "node --watch dist/server.js"
+    "start:server": "node dist/server.js",
+    "dev:server": "npx ts-nodo-dev src/server.js",
+    "dev:server-compiled": "node --watch dist/server.js"
   },
   "keywords": [],
   "author": "Adan Reh",
