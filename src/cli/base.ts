@@ -1,6 +1,6 @@
-import { ReadDB } from "../app/readDb";
+import { ReadDB } from "../core/readDb";
 import readline from 'readline';
-import { WriteDB, WriteDbOpt } from "../app/writeDb";
+import { WriteDB, WriteDbOpt } from "../core/writeDb";
 
 
 export const askForSecondInput = (readDb: ReadDB, rl: readline.Interface, writeDbOpt: WriteDbOpt) => {

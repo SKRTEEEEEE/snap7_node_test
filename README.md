@@ -14,14 +14,27 @@ Ejemplos básicos de proyectos para obtener conectividad a PLCs con Node Js. Uti
 - [Snap7](https://snap7.sourceforge.net/)
 - [OPC UA](https://opcfoundation.org/)
 
-  💡Puedes encontrar mas información sobre como conectar-se a la PLC, Snap7, OPC UA, al igual que las funcionalidades de este código pero escrito en `Python`, en el repositorio [snap7_py_show](https://github.com/SKRTEEEEEE/plc_py_conn).
-### Conceptos desarrollados (funcionalidades):
+  💡Puedes encontrar mas información sobre como conectar-se a una PLC, Snap7, OPC UA, al igual que las funcionalidades de este código pero escrito en `Python`, en el repositorio [snap7_py_show](https://github.com/SKRTEEEEEE/plc_py_conn).
+### Ejemplos PLCs:
+#### 1. [Ejemplo básico s300](https://github.com/SKRTEEEEEE/plc_py_conn/blob/main/snap7-tia.7z)
+- snap7 py -> snap7-tia (1st example) 
+- tia portal house -> Plc_snap7_test
+- Plc model -> s300
+#### 2. Ejemplo ejercicios 
+- snap7 py -> NO example 
+- tia portal house -> EjerciciosTimers
+- Plc model -> s1500
+#### 3. Ejemplo grafcet bot/HMI 
+- snap7 py -> NO example 
+- tia portal house -> s1500-timer
+- Plc model -> s1500
+### Funcionalidades:
 #### Scripts
-1. [snap7-test](./src/scripts/snap7-test.ts): Script con el código básico para conectar-se a la PLC y leer datos
-2. [read-db](./src/scripts/read-db.ts): Script con el código  para conectar-se a la PLC y leer datos utilizando funciones de código.
-3. [app-test](./src/scripts/app-test.ts): Script para comprobar el correcto uso de la `app`
+1. [test](./src/scripts/test.ts): Script con el código básico para conectar-se a la PLC y la opción de leer datos comentado.
+2. [read](./src/scripts/read.ts): Script con el código  para conectar-se a la PLC y leer datos.
 #### CLI versions
-- [cli-debounce](./src/cli/cli-debounce.ts): CLI con ejemplo de uso del debounce
+- [PLC manager](): CLI para manejar los [Ejemplos PLCs](#ejemplos-plcs) utilizando snap7.
+- [cli-debounce](./src/cli/cli-debounce.ts): CLI con ejemplo de uso del debounce.
 
 ### Dependencias utilizadas:
 - [`snap7`](https://github.com/mathiask88/node-snap7/blob/master/README.md): Para la conectividad con la PLC
@@ -31,8 +44,11 @@ Ejemplos básicos de proyectos para obtener conectividad a PLCs con Node Js. Uti
 - `typescript`: Superset para el tipado
 - `@types/jest`: Para agregar los tipos de TypeScript a Jest, facilitando el uso de las herramientas de test en un entorno TypeScript.
 - `ts-jest`: Un pre procesador para Jest que permite ejecutar tests escritos en TypeScript, integrándose sin problemas con el ecosistema de Jest y TypeScript.
+
 ## [Recursos](https://github.com/SKRTEEEEEE/markdowns)
+
 ### [Empezando](https://github.com/SKRTEEEEEE/markdowns/blob/main/utils/how-start/ts-tw_es.md)
+
 ### Conectividad PLCs gama 1500/1700
 Para la conectividad con las PLCs de gama 1500/1700 necesitamos habilitar la funcionalidad PUT/GET, para ello:
 - Hacemos doble click en nuestra PLC.

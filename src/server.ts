@@ -2,12 +2,12 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
-import { debouncedFetch } from './handle';
-import { ReadDB } from './app/readDb';
-import { plcOpt } from './app/config';
-import { WriteDB } from './app/writeDb';
-import { toggleBitMForDuration } from './app/toggleBit';
-import { ReadArea } from './app/readArea';
+import { debouncedFetch } from './core/pokemon';
+import { ReadDB } from './core/readDb';
+import { plcOpt } from './core/config';
+import { WriteDB } from './core/writeDb';
+import { toggleBitMForDuration } from './core/toggleBit';
+import { ReadArea } from './core/readArea';
 
 const hostname = 'localhost';
 const port = 4001;

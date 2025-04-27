@@ -1,9 +1,9 @@
 import readline from 'readline';
-import { ReadDB } from './app/readDb';
-import { ReadArea } from './app/readArea';
+import { ReadDB } from './core/readDb';
+import { ReadArea } from './core/readArea';
 import { askForSecondInput } from './cli/base';
-import { plcOpt } from './app/config';
-import { toggleBitMForDuration } from './app/toggleBit';
+import { plcOpt } from './core/config';
+import { toggleBitMForDuration } from './core/toggleBit';
 
 export const rl = readline.createInterface({
     input: process.stdin,
@@ -13,16 +13,19 @@ export const rl = readline.createInterface({
 
 enum DBPrograms {  's300' = 1, 's15001700' = 2, 's1516' = 3 }
 const dbProgramsOpt = {
+    //1. Ejemplo básico s300 - snap7 py, snap7-tia (1st example) - tia portal house, Plc_snap7_test
     [DBPrograms.s300]: {
         dbNumber: 3,
         start_address: 0,
         size: 259
     },
+    //2. Ejemplo ejercicios - snap7 py, NO example - tia portal house, EjerciciosTimers
     [DBPrograms.s15001700]: {
         dbNumber: 14,
         start_address: 0,
         size: 1
     },
+    //3. Ejemplo grafcet bot/HMI - snap7 py, NO example - tia portal house, s1500-timer
     [DBPrograms.s1516]: {
         dbNumber: 2,
         start_address: 0,

@@ -1,8 +1,8 @@
 import { Telegraf } from "telegraf";
 import { config } from "dotenv";
-import { ReadDB } from "./app/readDb";
-import { plcOpt } from "./app/config";
-import { WriteDB } from "./app/writeDb";
+import { ReadDB } from "./core/readDb";
+import { plcOpt } from "./core/config";
+import { WriteDB } from "./core/writeDb";
 
 
 config();
